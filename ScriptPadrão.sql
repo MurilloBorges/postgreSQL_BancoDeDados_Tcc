@@ -3,7 +3,7 @@ CREATE TABLE public.user (
 	cod_user int8 not null,
     first_name varchar(30) not null,
     last_name varchar(30) not null,
-    birth date without time zone not null,
+    birth timestamp without time zone not null,
     sex character varying(1) not null,
     photo bytea null,
     email varchar(50) not null,
@@ -23,7 +23,7 @@ create table public.chat (
 	date_insert timestamp without time zone not null,
 	CONSTRAINT pk_chat PRIMARY KEY (cod_chat),
 	CONSTRAINT fk_chat_cod_user_me FOREIGN KEY (cod_user_me) REFERENCES public.user(cod_user),
-	CONSTRAINT fk_chat_cod_user_you FOREIGN KEY (cod_user_you) REFERENCES public.user(cod_user),
+	CONSTRAINT fk_chat_cod_user_you FOREIGN KEY (cod_user_you) REFERENCES public.user(cod_user)
 );
 
 create sequence public.chat_seq;
@@ -37,7 +37,7 @@ create table public.message (
 	message character varying not null,
 	CONSTRAINT pk_message PRIMARY KEY (cod_message),
 	CONSTRAINT fk_message_cod_chat FOREIGN KEY (cod_chat) REFERENCES public.chat(cod_chat),
-	CONSTRAINT fk_message_cod_user FOREIGN KEY (cod_user) REFERENCES public.user(cod_user),
+	CONSTRAINT fk_message_cod_user FOREIGN KEY (cod_user) REFERENCES public.user(cod_user)
 );
 
 create sequence public.message_seq;
